@@ -109,5 +109,13 @@ remover_palavras <- function(s, p){
   s
 }
 
-
-
+#' Remover acentos
+#'
+#' @param s vetor de chr
+#' @return vetor de chr com os acentos removidos
+#'
+#' @export
+remover_acentos <- function(s){
+  chartr("áéíóúàèìòùãõâêîôûïüñäö",
+         "aeiouaeiouaoaeiouiunao", s)
+}
