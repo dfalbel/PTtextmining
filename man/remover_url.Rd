@@ -4,7 +4,7 @@
 \alias{remover_url}
 \title{Remover urls}
 \usage{
-remover_url(x)
+remover_url(s)
 }
 \arguments{
 \item{s}{vetor de chr}

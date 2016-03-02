@@ -28,7 +28,7 @@ remover_pontuacao <- function(s){
 #' @return vetor de chr com urls excluidas
 #'
 #' @export
-remover_url <- function(x){
+remover_url <- function(s){
   s <- stringr::str_replace_all(s, "http\\S+\\s*", "")
   stringr::str_replace_all(s, "www.\\S+\\s*", "")
 }
@@ -83,6 +83,44 @@ remover_espacos_excedentes <- function(s){
   stringr::str_replace_all(s, "  ", " ")
 }
 
+#' Remover acentos
+#'
+#' @param s vetor de chr
+#' @return vetor de chr com os acentos removidos
+#'
+#' @export
+remover_acentos <- function(s){
+  chartr("áéíóúàèìòùãõâêîôûïüñäö",
+         "aeiouaeiouaoaeiouiunao", s)
+}
+
+#' Substituir uma palavra por outra
+#'
+#' @param s vetor de chr
+#' @param pa palavra que deve ser substituida
+#' @param pd palavra colocada no lugar de pa
+#' @return vetor de chr com as palavras substituidas
+#'
+#' @export
+substituir_palavra <- function(s, pa, pd){
+  stringr::str_replace_all(s, paste0("\\b", pa, "\\b"), pd)
+}
+
+#' Substituir uma lista de palavras por uma lista de palavras
+#'
+#' @param s vetor de chr
+#' @param pa vetor de palavras que serão substituidas
+#' @param pd vetor de palavras que serão colcoadas no lugar
+#' @return vetor de chr com as palavras substituidas
+#'
+#' @export
+substituir_palavras <- function(s, pa, pd){
+  for(i in 1:length(pa)){
+    s <- substituir_palavra(s, pa[i], pd[i])
+  }
+  s
+}
+
 #' Remover palavra
 #' 
 #' @param s vetor de chr
@@ -92,7 +130,7 @@ remover_espacos_excedentes <- function(s){
 #' 
 #' @export
 remover_palavra <- function(s, p){
-  stringr::str_replace_all(s, paste0("\\b", p, "\\b"), "")
+  substituir_palavra(s, "")
 }
 
 #' Remover palavras
@@ -109,13 +147,31 @@ remover_palavras <- function(s, p){
   s
 }
 
-#' Remover acentos
-#'
+#' Fazer o Stemming
+#' 
+#' Essa função usa a função stemDocument do pacote tm para realizar o stemming.
+#' Por sua vez, o tm utiliza o algoritmo Porter para realizar o stemming. Esse 
+#' algoritmo é descrito no seguinte link: 
+#' http://snowball.tartarus.org/algorithms/portuguese/stemmer.html 
+#' 
 #' @param s vetor de chr
-#' @return vetor de chr com os acentos removidos
+#' @return vetor de chr com stemming realizado
 #'
 #' @export
-remover_acentos <- function(s){
-  chartr("áéíóúàèìòùãõâêîôûïüñäö",
-         "aeiouaeiouaoaeiouiunao", s)
+transformar_stemming <- function(s){
+  palavras <- dplyr::data_frame(
+    antes = stringr::str_split(s, " ") %>% unlist %>% unique(),
+    depois = tm::stemDocument(antes, language = "pt")
+  )
+  
+  palavras <- palavras %>%
+    dplyr::filter(antes != depois) %>%
+    dplyr::mutate(n_letras = stringr::str_length(antes)) %>%
+    dplyr::group_by(depois) %>%
+    dplyr::arrange(desc(n_letras)) %>%
+    dplyr::mutate(subst = first(antes))
+  
+  s <- substituir_palavras(s, palavras$antes, palavras$subst)
+  return(s)
 }
+
