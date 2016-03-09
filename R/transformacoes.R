@@ -147,6 +147,18 @@ remover_palavras <- function(s, p){
   s
 }
 
+#' Remover Stopbords
+#'
+#' @param s vetor de chr 
+#' @return vetor de chr sem as stopwords
+#' 
+#' @seealso \code{\link{stopwords}}
+#' 
+#' @export
+remover_stopwords <- function(s){
+  remover_palavras(s, stopwords())
+}
+
 #' Fazer o Stemming
 #' 
 #' Essa função usa a função stemDocument do pacote tm para realizar o stemming.
