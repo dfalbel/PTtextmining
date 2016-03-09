@@ -1,16 +1,22 @@
 # Lendo Hunspell Affix files
 
-keywords <- list(
-  "SET",
-  "MAP",
-  "BREAK",
-  "REP",
-  "SFX",
-  "PFX"
-)
+# keywords <- list(
+#   "SET",
+#   "MAP",
+#   "BREAK",
+#   "REP",
+#   "SFX",
+#   "PFX"
+# )
+# 
+# aff <- readLines("data-raw/dicionario/dicionario.aff")
+# dic <- readLines("data-raw/dicionario/dicionario.dic")
 
-aff <- readLines("data-raw/dicionario/dicionario.aff")
 
+#' Procurar os sufixos em um dicionário
+#'
+#' @param aff dicionário de sufixos e afixos no estilo do do hunspell.
+#'
 look_SFX <- function(aff){
   
   grupos <- dplyr::data_frame(
@@ -25,6 +31,34 @@ look_SFX <- function(aff){
     )
   }) %>%
     dplyr::select(-indice, -tag, -Y, -qtd) %>%
-    tidyr::separate(SFX, c("SFX", "tag", "aux", "subst", "regex"), "[:space:]+")
+    tidyr::separate(SFX, c("SFX", "tag", "remover", "adicionar", "procurar"), "[:space:]+")
   
 }
+
+#' Processar o dicionario
+#'
+#' @param dic dicionário no estilo do dicionario do hunspell
+#'
+process_dic <- function(dic){
+  dicionario <- dplyr::data_frame(
+    palavras = dic[-1]
+  ) %>%
+    tidyr::separate(
+      palavras,
+      c("palavras", "tag"),
+      "/",
+      fill = "right"
+    )
+ return(dicionario) 
+}
+
+# As <- dicionario %>% filter(str_detect(tag, "A"))
+# sA <- sufixos %>% filter(tag == "A")
+# sA <- sA[1,]
+# As %>%
+#   filter(str_detect(palavras, "ão\\b")) %>%
+#   mutate(palavra2 = str_replace_all(palavras, "o\\b", "es")) %>%
+#   View
+
+
+
