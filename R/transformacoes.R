@@ -130,7 +130,7 @@ substituir_palavras <- function(s, pa, pd){
 #' 
 #' @export
 remover_palavra <- function(s, p){
-  substituir_palavra(s, "")
+  substituir_palavra(s, p, "")
 }
 
 #' Remover palavras
@@ -178,10 +178,15 @@ transformar_stemming <- function(s){
   
   palavras <- palavras %>%
     dplyr::filter(antes != depois) %>%
+    dplyr::filter(!is.null(antes), !is.null(depois)) %>% 
+    dplyr::filter(antes != "", depois != "") %>%
+    dplyr::filter(antes != " ", depois != " ") %>%
     dplyr::mutate(n_letras = stringr::str_length(antes)) %>%
     dplyr::group_by(depois) %>%
+    dplyr::mutate(n = n()) %>%
     dplyr::arrange(desc(n_letras)) %>%
-    dplyr::mutate(subst = first(antes))
+    dplyr::mutate(subst = first(antes)) %>%
+    dplyr::filter(n > 1)
   
   s <- substituir_palavras(s, palavras$antes, palavras$subst)
   return(s)
