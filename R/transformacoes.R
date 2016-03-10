@@ -187,3 +187,37 @@ transformar_stemming <- function(s){
   return(s)
 }
 
+#' Corrigir as palavras
+#' 
+#' @param s vetor de chr
+#' @return vetor de chr com palavras corrigidas usando o hunspell
+#' 
+#' @seealso \code{\link[hunspell]{hunspell_check_pt}} and 
+#' \code{\link[hunspell]{hunspell_suggest_pt}}
+#' 
+#' @export
+transformar_corrigir <- function(s){
+  p <- stringr::str_extract_all(s, "\\b[:alpha:]+\\b") %>%
+    unlist() %>%
+    unique()
+  check <- hunspell::hunspell_check_pt(p)
+  
+  p <- p[!check]
+  
+  if(length(p) > 0){
+    palavras <- dplyr::data_frame(
+      antes = p,
+      depois = hunspell::hunspell_suggest_pt(p) %>%
+        plyr::laply(function(x){
+          x[[1]]
+        })
+    )
+    palavras <- palavras %>% 
+      dplyr::filter(!is.null(depois))
+    
+    s <- substituir_palavras(s, palavras$antes, palavras$depois)
+  }
+  return(s)
+}
+
+
