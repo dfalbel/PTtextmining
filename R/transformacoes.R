@@ -188,7 +188,10 @@ transformar_stemming <- function(s){
     dplyr::mutate(subst = first(antes)) %>%
     dplyr::filter(n > 1)
   
-  s <- substituir_palavras(s, palavras$antes, palavras$subst)
+  if(nrow(palavras) > 0){
+    s <- substituir_palavras(s, palavras$antes, palavras$subst) 
+  }
+  
   return(s)
 }
 
