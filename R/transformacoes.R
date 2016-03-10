@@ -192,6 +192,24 @@ transformar_stemming <- function(s){
   return(s)
 }
 
+
+#' Encontrar erros
+#' 
+#' @param s vetor de chr
+#' @return vetor com as palavras que estão escritas erradas o texto.
+#'
+encontrar_erros <- function(s){
+  p <- stringr::str_extract_all(s, "\\b[:alpha:]+\\b") %>%
+    unlist() %>%
+    unique()
+  check <- hunspell::hunspell_check_pt(p)
+  
+  p <- p[!check]
+  
+  return(p)
+}
+
+
 #' Corrigir as palavras
 #' 
 #' @param s vetor de chr
@@ -202,12 +220,8 @@ transformar_stemming <- function(s){
 #' 
 #' @export
 transformar_corrigir <- function(s){
-  p <- stringr::str_extract_all(s, "\\b[:alpha:]+\\b") %>%
-    unlist() %>%
-    unique()
-  check <- hunspell::hunspell_check_pt(p)
   
-  p <- p[!check]
+  p <- encontrar_erros(s)
   
   if(length(p) > 0){
     palavras <- dplyr::data_frame(
@@ -225,4 +239,14 @@ transformar_corrigir <- function(s){
   return(s)
 }
 
-
+#' Remover palavras erradas
+#' 
+#' @param s vetor de chr
+#' @return vetor de chr com as palavras escritas de forma errada removidas.
+#' 
+#' @export
+remover_palavras_erradas <- function(s){
+  p <- encontrar_erros(s)
+  s <- remover_palavras(s, p)
+  return(s)
+}
