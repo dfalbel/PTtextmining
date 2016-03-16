@@ -90,8 +90,9 @@ remover_espacos_excedentes <- function(s){
 #'
 #' @export
 remover_acentos <- function(s){
-  chartr("áéíóúàèìòùãõâêîôûïüñäö",
-         "aeiouaeiouaoaeiouiunao", s)
+  #   chartr("áéíóúàèìòùãõâêîôûïüñäö",
+  #          "aeiouaeiouaoaeiouiunao", s)
+  iconv(s, to='ASCII//TRANSLIT')
 }
 
 #' Substituir uma palavra por outra

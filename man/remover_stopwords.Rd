@@ -4,7 +4,7 @@
 \alias{remover_stopwords}
 \title{Remover Stopbords}
 \usage{
-remover_stopwords(s)
+remover_stopwords(s, ignorar = character(0))
 }
 \arguments{
 \item{s}{vetor de chr}
