@@ -4,10 +4,13 @@
 \alias{mtd}
 \title{Matriz de termos e documentos}
 \usage{
-mtd(s, tipo = "contagem")
+mtd(s, n = 1, tipo = "contagem")
 }
 \arguments{
 \item{s}{vetor de chr}
+
+\item{n}{n usado no n-gram. Esse argumento é usado se você quiser ao invés de
+uma matriz de termos, uma matriz com os n-grams.}
 
 \item{tipo}{tipo de matriz (contagem ou flag)}
 }

@@ -3,6 +3,7 @@
 export("%>%")
 export(carregar_textos)
 export(mtd)
+export(ngram)
 export(remover_acentos)
 export(remover_dinheiro)
 export(remover_espacos_excedentes)
