@@ -13,9 +13,6 @@ transformar_stemming(s)
 vetor de chr com stemming realizado
 }
 \description{
-Essa função usa a função stemDocument do pacote tm para realizar o stemming.
-Por sua vez, o tm utiliza o algoritmo Porter para realizar o stemming. Esse 
-algoritmo é descrito no seguinte link: 
-http://snowball.tartarus.org/algorithms/portuguese/stemmer.html
+Fazer o Stemming
 }
 

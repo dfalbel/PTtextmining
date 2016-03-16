@@ -2,20 +2,38 @@
 % Please edit documentation in R/transformacoes.R
 \name{remover_stopwords}
 \alias{remover_stopwords}
-\title{Remover Stopbords}
+\title{Remover Stopwords}
 \usage{
 remover_stopwords(s, ignorar = character(0))
 }
 \arguments{
 \item{s}{vetor de chr}
+
+\item{igonorar}{vetor de palavras que você não quer que sejam excluídas do
+texto.}
 }
 \value{
 vetor de chr sem as stopwords
 }
 \description{
-Remover Stopbords
+Remover Stopwords
 }
 \seealso{
 \code{\link{stopwords}}
+
+Other transf: \code{\link{remover_acentos}},
+  \code{\link{remover_dinheiro}},
+  \code{\link{remover_espacos_excedentes}},
+  \code{\link{remover_hashtags}},
+  \code{\link{remover_numeros}},
+  \code{\link{remover_palavras_erradas}},
+  \code{\link{remover_palavras}},
+  \code{\link{remover_palavra}},
+  \code{\link{remover_pontuacao}},
+  \code{\link{remover_url}},
+  \code{\link{substituir_palavras}},
+  \code{\link{substituir_palavra}},
+  \code{\link{transformar_corrigir}},
+  \code{\link{transformar_minusculo}}
 }
 

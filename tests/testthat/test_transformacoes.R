@@ -1,4 +1,5 @@
 library(stringr)
+library(PTtextmining)
 context("Transformações")
 
 # ---------------------
@@ -12,8 +13,8 @@ test_that("transformar minúsculo , transforma em minúsculo", {
 
 # ---------------------
 
-str <- c("oi!!?", "tudo bem..", "tchau,", "!sexy;:")
-str_e <- c("oi", "tudo bem", "tchau", "sexy")
+str <- c("oi!!?", "tudo bem..", "tchau,", "!sexy;:", "!?:;.,")
+str_e <- c("oi", "tudo bem", "tchau", "sexy", "")
 
 test_that("remover pontuacao", {
   expect_equal(remover_pontuacao(str), str_e)
@@ -22,9 +23,9 @@ test_that("remover pontuacao", {
 # ---------------------
 
 str <- c("http://r-pkgs.had.co.nz/tests.html", "https://github.com/ tudo bem..")
-str_e <- c("", " tudo bem..")
+str_e <- c("", "tudo bem..")
 
-test_that("remover pontuacao", {
+test_that("remover url", {
   expect_equal(remover_url(str), str_e)
 })
 

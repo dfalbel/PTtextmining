@@ -15,4 +15,20 @@ vetor de chr seme spaços excedentes
 \description{
 Remover espaços excedentes
 }
+\seealso{
+Other transf: \code{\link{remover_acentos}},
+  \code{\link{remover_dinheiro}},
+  \code{\link{remover_hashtags}},
+  \code{\link{remover_numeros}},
+  \code{\link{remover_palavras_erradas}},
+  \code{\link{remover_palavras}},
+  \code{\link{remover_palavra}},
+  \code{\link{remover_pontuacao}},
+  \code{\link{remover_stopwords}},
+  \code{\link{remover_url}},
+  \code{\link{substituir_palavras}},
+  \code{\link{substituir_palavra}},
+  \code{\link{transformar_corrigir}},
+  \code{\link{transformar_minusculo}}
+}
 

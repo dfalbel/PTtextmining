@@ -1,7 +1,30 @@
-# transformações
+#' Tranformações
+#'
+#' Lista de todas as transformações que podem ser feitas com o pacote
+#' 
+#' @name transformacoes
+#' @rdname transformacoes
+#' 
+#' 
+#' @seealso \code{\link{transformar_minusculo}}
+#' @seealso \code{\link{remover_pontuacao}}
+#' @seealso \code{\link{remover_url}}
+#' @seealso \code{\link{remover_url}}
+#' @seealso \code{\link{remover_hashtags}}
+#' @seealso \code{\link{remover_dinheiro}}
+#' @seealso \code{\link{remover_numeros}}
+#' @seealso \code{\link{remover_espacos_excedentes}}
+#' @seealso \code{\link{remover_acentos}}
+#' @seealso \code{\link{remover_stopwords}}
+#' @seealso \code{\link{transformar_stemming}}
+#' @seealso \code{\link{transformar_corrigir}}
+#' @seealso \code{\link{remover_palavras_erradas}}
+#'  
+NULL
 
 #' Tranformar letras do corpus em minusculo
-#'
+#' 
+#' @family transf
 #' @param s vetor de chr
 #' @return vetor de chr transformado em minúsculos
 #'
@@ -11,8 +34,9 @@ transformar_minusculo <- function(s){
 }
 
 #' Remover pontuação
+#' 
 #'
-#'
+#' @family transf
 #' @param s vetor de chr
 #' @return vetor de chr com a pontuação removida
 #'
@@ -24,6 +48,7 @@ remover_pontuacao <- function(s){
 
 #' Remover urls 
 #'
+#' @family transf
 #' @param s vetor de chr
 #' @return vetor de chr com urls excluidas
 #'
@@ -36,6 +61,7 @@ remover_url <- function(s){
 
 #' Remover hashtags
 #' 
+#' @family transf
 #' @param s vetor de chr
 #' @return vetor de chr com hashtags excluidas
 #'  
@@ -46,6 +72,7 @@ remover_hashtags <- function(s){
 
 #' Remover dinheiro
 #' 
+#' @family transf
 #' @param s vetor de chr
 #' @return vetor de chr com r$ excluido
 #' 
@@ -58,6 +85,7 @@ remover_dinheiro <- function(s){
 
 #' Remover números 
 #' 
+#' @family transf
 #' @param s vetor de chr
 #' @return vetor de chr sem números
 #' 
@@ -69,6 +97,7 @@ remover_numeros <- function(s){
 
 #' Remover espaços excedentes
 #' 
+#' @family transf
 #' @param s vetor de chr
 #' @return vetor de chr seme spaços excedentes
 #' 
@@ -85,6 +114,7 @@ remover_espacos_excedentes <- function(s){
 
 #' Remover acentos
 #'
+#' @family transf
 #' @param s vetor de chr
 #' @return vetor de chr com os acentos removidos
 #'
@@ -97,6 +127,8 @@ remover_acentos <- function(s){
 
 #' Substituir uma palavra por outra
 #'
+#'
+#' @family transf
 #' @param s vetor de chr
 #' @param pa palavra que deve ser substituida
 #' @param pd palavra colocada no lugar de pa
@@ -108,7 +140,8 @@ substituir_palavra <- function(s, pa, pd){
 }
 
 #' Substituir uma lista de palavras por uma lista de palavras
-#'
+#' 
+#' @family transf
 #' @param s vetor de chr
 #' @param pa vetor de palavras que serão substituidas
 #' @param pd vetor de palavras que serão colcoadas no lugar
@@ -124,6 +157,7 @@ substituir_palavras <- function(s, pa, pd){
 
 #' Remover palavra
 #' 
+#' @family transf
 #' @param s vetor de chr
 #' @param p palavra que deseja excluir
 #' 
@@ -136,6 +170,7 @@ remover_palavra <- function(s, p){
 
 #' Remover palavras
 #' 
+#' @family transf
 #' @param s vetor de chr
 #' @param p vetor de palavras que desejar excluir
 #' @return vetor de chr sem as palavras indicadas no parametro p
@@ -148,9 +183,12 @@ remover_palavras <- function(s, p){
   s
 }
 
-#' Remover Stopbords
-#'
-#' @param s vetor de chr 
+#' Remover Stopwords
+#' 
+#' @family transf
+#' @param s vetor de chr
+#' @param igonorar vetor de palavras que você não quer que sejam excluídas do
+#' texto. 
 #' @return vetor de chr sem as stopwords
 #' 
 #' @seealso \code{\link{stopwords}}
@@ -162,6 +200,8 @@ remover_stopwords <- function(s, ignorar = character(0)){
 }
 
 #' Fazer o Stemming
+#'
+#' @family transf
 #' 
 #' Essa função usa a função stemDocument do pacote tm para realizar o stemming.
 #' Por sua vez, o tm utiliza o algoritmo Porter para realizar o stemming. Esse 
@@ -226,7 +266,8 @@ encontrar_erros <- function(s){
 
 
 #' Corrigir as palavras
-#' 
+#'
+#' @family transf 
 #' @param s vetor de chr
 #' @return vetor de chr com palavras corrigidas usando o hunspell
 #' 
@@ -256,6 +297,7 @@ transformar_corrigir <- function(s){
 
 #' Remover palavras erradas
 #' 
+#' @family transf
 #' @param s vetor de chr
 #' @return vetor de chr com as palavras escritas de forma errada removidas.
 #' 

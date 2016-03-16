@@ -15,4 +15,20 @@ vetor de chr com as palavras escritas de forma errada removidas.
 \description{
 Remover palavras erradas
 }
+\seealso{
+Other transf: \code{\link{remover_acentos}},
+  \code{\link{remover_dinheiro}},
+  \code{\link{remover_espacos_excedentes}},
+  \code{\link{remover_hashtags}},
+  \code{\link{remover_numeros}},
+  \code{\link{remover_palavras}},
+  \code{\link{remover_palavra}},
+  \code{\link{remover_pontuacao}},
+  \code{\link{remover_stopwords}},
+  \code{\link{remover_url}},
+  \code{\link{substituir_palavras}},
+  \code{\link{substituir_palavra}},
+  \code{\link{transformar_corrigir}},
+  \code{\link{transformar_minusculo}}
+}
 
