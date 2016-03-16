@@ -2,8 +2,10 @@
 
 export("%>%")
 export(carregar_textos)
+export(detectar)
 export(mtd)
 export(ngram)
+export(palavras_seguidas)
 export(remover_acentos)
 export(remover_dinheiro)
 export(remover_espacos_excedentes)
