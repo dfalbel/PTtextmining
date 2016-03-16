@@ -171,23 +171,33 @@ remover_stopwords <- function(s){
 #'
 #' @export
 transformar_stemming <- function(s){
+  
   palavras <- dplyr::data_frame(
-    antes = stringr::str_split(s, " ") %>% unlist %>% unique(),
-    depois = tm::stemDocument(antes, language = "pt")
-  )
+    antes = stringr::str_split(s, " ") %>% unlist
+  ) %>%
+    dplyr::group_by(antes) %>%
+    dplyr::summarise(n_antes = n()) %>%
+    dplyr::mutate(
+      depois = tm::stemDocument(antes, language = "pt")
+    )
   
+  # tirar as palavras que não são usadas
   palavras <- palavras %>%
-    dplyr::filter(antes != depois) %>%
-    dplyr::filter(!is.null(antes), !is.null(depois)) %>% 
-    dplyr::filter(antes != "", depois != "") %>%
+    dplyr::filter(antes != depois) %>% # só substituir se antes for != de depois
+    dplyr::filter(!is.null(antes), !is.null(depois)) %>% # só substituir se não for NULL
+    dplyr::filter(antes != "", depois != "") %>% # 
     dplyr::filter(antes != " ", depois != " ") %>%
-    dplyr::mutate(n_letras = stringr::str_length(antes)) %>%
     dplyr::group_by(depois) %>%
-    dplyr::mutate(n = n()) %>%
-    dplyr::arrange(desc(n_letras)) %>%
-    dplyr::mutate(subst = first(antes)) %>%
-    dplyr::filter(n > 1)
+    dplyr::mutate(n_depois = n()) %>%
+    dplyr::filter(n_depois > 1) %>%
+    dplyr::ungroup()
   
+  # usar a palavra que mais aparece antes
+  palavras <- palavras %>%
+    dplyr::group_by(depois) %>%
+    dplyr::arrange(desc(n_antes)) %>%
+    dplyr::mutate(subst = first(antes))
+    
   if(nrow(palavras) > 0){
     s <- substituir_palavras(s, palavras$antes, palavras$subst) 
   }
