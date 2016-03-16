@@ -155,8 +155,9 @@ remover_palavras <- function(s, p){
 #' @seealso \code{\link{stopwords}}
 #' 
 #' @export
-remover_stopwords <- function(s){
-  remover_palavras(s, stopwords())
+remover_stopwords <- function(s, ignorar = character(0)){
+  p <- stopwords()[!stopwords() %in% ignorar]
+  remover_palavras(s, p)
 }
 
 #' Fazer o Stemming
