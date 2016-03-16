@@ -1,11 +1,19 @@
 Package: PTtextmining
-Title: Text mining fácil em português
-Version: 0.0.0.9000
+Title: Text mining facil em portugues
+Version: 0.0.0.9001
 Authors@R: person("Daniel", "Falbel", email = "dfalbel@gmail.com", role = c("aut", "cre"))
-Description: Funções para facilitar o text mining em português.
+Description: Funcoes para facilitar o text mining em lingua portuguesa.
 Depends:
-    R (>= 3.1.2)
-License: MIT
+    R (>= 3.1.2),
+    magrittr
+Imports:
+    dplyr,
+    plyr,
+    stringr,
+    tidyr,
+    tm,
+    hunspell
+License: MIT + file LICENSE
 LazyData: true
 Suggests:
     testthat
