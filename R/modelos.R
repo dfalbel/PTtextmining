@@ -106,5 +106,3 @@ palavras_seguidas <- function(s, p, qtd = NULL){
   }
   return(r)
 }
-
-
