@@ -42,7 +42,7 @@ transformar_minusculo <- function(s){
 #'
 #' @export
 remover_pontuacao <- function(s){
-  stringr::str_replace_all(s, "[:punct:]", "")
+  stringr::str_replace_all(s, "[:punct:]", " ")
 }
 
 
@@ -54,8 +54,8 @@ remover_pontuacao <- function(s){
 #'
 #' @export
 remover_url <- function(s){
-  s <- stringr::str_replace_all(s, "http\\S+\\s*", "")
-  stringr::str_replace_all(s, "www.\\S+\\s*", "")
+  s <- stringr::str_replace_all(s, "http\\S+\\s*", " ")
+  stringr::str_replace_all(s, "www.\\S+\\s*", " ")
 }
 
 
@@ -67,7 +67,7 @@ remover_url <- function(s){
 #'  
 #' @export     
 remover_hashtags <- function(s){
-  stringr::str_replace_all(s, "#\\S+\\s*", "")
+  stringr::str_replace_all(s, "#\\S+\\s*", " ")
 }
 
 #' Remover dinheiro
