@@ -120,9 +120,9 @@ remover_espacos_excedentes <- function(s){
 #'
 #' @export
 remover_acentos <- function(s){
-  #   chartr("áéíóúàèìòùãõâêîôûïüñäö",
-  #          "aeiouaeiouaoaeiouiunao", s)
-  iconv(s, to='ASCII//TRANSLIT')
+  enc <- rvest::guess_encoding(s)
+  enc <- enc$encoding[1]
+  iconv(s, from = enc, to='ASCII//TRANSLIT')
 }
 
 #' Substituir uma palavra por outra
